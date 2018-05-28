@@ -1,0 +1,462 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    font-family: 'Coda', cursive;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+/*
+ * Styles for the deck of cards
+ */
+
+.deck {
+    width: 660px;
+    min-height: 680px;
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 3em;
+}
+
+.deck .card {
+    height: 125px;
+    width: 125px;
+    background: #2e3d49;
+    font-size: 0;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+.deck .card.open {
+    transform: rotateY(0);
+    background: #02b3e4;
+    cursor: default;
+    animation-name: flipInY;
+    -webkit-backface-visibility: visible !important;
+	backface-visibility: visible !important;
+	animation-duration: .75s;
+}
+
+.deck .card.show {
+    font-size: 33px;
+}
+
+.deck .card.match {
+    animation-name: rubberBand;
+    -webkit-backface-visibility: visible !important;
+	backface-visibility: visible !important;
+	animation-duration: .75s;
+    cursor: default;
+    background: #02ccba;
+    font-size: 33px;
+
+
+}
+.deck .card.unmatched {
+	animation-name: pulse;
+	-webkit-backface-visibility: visible !important;
+	backface-visibility: visible !important;
+	animation-duration: .75s;
+	background: #e2043b;
+}
+
+
+
+
+
+
+/*
+ * Styles for the Score Panel
+ */
+
+.score-panel {
+    text-align: left;
+    width: 345px;
+    margin-bottom: 10px;
+}
+
+.score-panel .stars {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: 0 5px 0 0;
+}
+
+.score-panel .stars li {
+    list-style: none;
+    display: inline-block;
+}
+
+.score-panel .restart {
+    float: right;
+    cursor: pointer;
+}
+
+
+.deck .card.disabled {
+	pointer-events: none;
+	opacity: 0.9;
+}
+
+
+
+@keyframes flipInY {
+	from {
+		transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
+		animation-timing-function: ease-in;
+		opacity: 0;
+	}
+
+	40% {
+		transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+		animation-timing-function: ease-in;
+	}
+
+	60% {
+		transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+		opacity: 1;
+	}
+
+	80% {
+		transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+	}
+
+	to {
+		transform: perspective(400px);
+	}
+}
+
+
+@keyframes rubberBand {
+	from {
+		transform: scale3d(1, 1, 1);
+	}
+
+	30% {
+		transform: scale3d(1.25, 0.75, 1);
+	}
+
+	40% {
+		transform: scale3d(0.75, 1.25, 1);
+	}
+
+	50% {
+		transform: scale3d(1.15, 0.85, 1);
+	}
+
+	65% {
+		transform: scale3d(.95, 1.05, 1);
+	}
+
+	75% {
+		transform: scale3d(1.05, .95, 1);
+	}
+
+	to {
+		transform: scale3d(1, 1, 1);
+	}
+}
+
+
+@keyframes pulse {
+	from {
+		transform: scale3d(1, 1, 1);
+	}
+
+	50% {
+		transform: scale3d(1.2, 1.2, 1.2);
+	}
+
+	to {
+		transform: scale3d(1, 1, 1);
+	}
+}
+
+
+#congrats {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, .8);
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: none;
+}
+#congrats p {
+	letter-spacing: 2px;
+}
+
+#final-Stars {
+	font-size: 30px;
+    letter-spacing: 40px;
+	color: orangered;
+	margin-bottom: 20px;
+}
+#final-moves {
+	margin-right: 5px;
+	margin-left: 5px;
+}
+.final-moves-container {
+	margin-bottom: 20px;
+}
+.play-again-btn {
+	color: #fff;
+	background-color: lightseagreen;
+	border: none;
+	padding: 10px 50px;
+	border-radius: 5px;
+	font-weight: bold;
+}
+
+
+
+.circle {
+	fill: none;
+	stroke: #81d135;
+	stroke-width: 4;
+	stroke-linecap: round;
+	stroke-miterlimit: 10;
+  }
+  
+  .circle-dash {
+	fill: none;
+	stroke: #81d135;
+	stroke-width: 4;
+	stroke-linecap: round;
+	stroke-miterlimit: 10;
+  }
+  
+  .circle-behind {
+	fill: none;
+	stroke: #ffffff;
+	stroke-width: 5;
+	stroke-linecap: round;
+	stroke-miterlimit: 10;
+  }
+  
+  .circle-ahead {
+	fill: none;
+	stroke: #ffffff;
+	stroke-width: 6;
+	stroke-linecap: round;
+	stroke-miterlimit: 10;
+  }
+  
+  .check-dash {
+	fill: none;
+	stroke: #81d135;
+	stroke-width: 4;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-miterlimit: 10;
+  }
+  
+  .check-behind {
+	fill: none;
+	stroke: #ffffff;
+	stroke-width: 5;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-miterlimit: 10;
+  }
+  
+  .check-ahead {
+	fill: none;
+	stroke: #ffffff;
+	stroke-width: 6;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-miterlimit: 10;
+  }
+  
+  .check {
+	fill: none;
+	stroke: #81d135;
+	stroke-width: 4;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-miterlimit: 10;
+  }
+  
+  .circle {
+	stroke-dasharray: 300;
+	stroke-dashoffset: 0;
+	-webkit-animation: circle 1.2s linear forwards;
+	-o-webkit-animation: circle 1.2s linear forwards;
+	-moz-webkit-animation: circle 1.2s linear forwards;
+	animation: circle 1.2s linear forwards;
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+			animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+  }
+  
+  @-webkit-keyframes circle {
+	from {
+	  stroke-dashoffset: 300;
+	}
+	to {
+	  stroke-dashoffset: 000;
+	}
+  }
+  .circle-dash {
+	stroke-dasharray: 5;
+	stroke-dashoffset: 0;
+	-webkit-animation: circle-dash 1.2s linear forwards;
+	-o-webkit-animation: circle-dash 1.2s linear forwards;
+	-moz-webkit-animation: circle-dash 1.2s linear forwards;
+	animation: circle-dash 1.2s linear forwards;
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+			animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+  }
+  
+  @-webkit-keyframes circle-dash {
+	from {
+	  stroke-dashoffset: 305;
+	}
+	to {
+	  stroke-dashoffset: 000;
+	}
+  }
+  .circle-behind {
+	stroke-dasharray: 300;
+	stroke-dashoffset: 0;
+	-webkit-animation: circle-behind 1.2s linear forwards;
+	-o-webkit-animation: circle-behind 1.2s linear forwards;
+	-moz-webkit-animation: circle-behind 1.2s linear forwards;
+	animation: circle-behind 1.2s linear forwards;
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+			animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+  }
+  
+  @-webkit-keyframes circle-behind {
+	from {
+	  stroke-dashoffset: 290;
+	}
+	to {
+	  stroke-dashoffset: -15;
+	}
+  }
+  .circle-ahead {
+	stroke-dasharray: 315;
+	stroke-dashoffset: 0;
+	-webkit-animation: circle-ahead 1.2s linear forwards;
+	-o-webkit-animation: circle-ahead 1.2s linear forwards;
+	-moz-webkit-animation: circle-ahead 1.2s linear forwards;
+	animation: circle-ahead 1.2s linear forwards;
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+			animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+  }
+  
+  @-webkit-keyframes circle-ahead {
+	from {
+	  stroke-dashoffset: -26;
+	}
+	to {
+	  stroke-dashoffset: -330;
+	}
+  }
+  .check {
+	stroke-dasharray: 65;
+	stroke-dashoffset: 0;
+	-webkit-animation: check 1.6s linear forwards;
+	-o-webkit-animation: check 1.6s linear forwards;
+	-moz-webkit-animation: check 1.6s linear forwards;
+	animation: check 1.6s linear forwards;
+	-webkit-animation-timing-function: cubic-bezier(0.6, 0, 0.2, 1);
+			animation-timing-function: cubic-bezier(0.6, 0, 0.2, 1);
+  }
+  
+  @-webkit-keyframes check {
+	from {
+	  stroke-dashoffset: 65;
+	}
+	to {
+	  stroke-dashoffset: 000;
+	}
+  }
+  .check-dash {
+	stroke-dasharray: 5;
+	stroke-dashoffset: 0;
+	-webkit-animation: check-dash 1.6s linear forwards;
+	-o-webkit-animation: check-dash 1.6s linear forwards;
+	-moz-webkit-animation: check-dash 1.6s linear forwards;
+	animation: check-dash 1.6s linear forwards;
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+			animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+  }
+  
+  @-webkit-keyframes check-dash {
+	from {
+	  stroke-dashoffset: 115;
+	}
+	to {
+	  stroke-dashoffset: 0;
+	}
+  }
+  .check-behind {
+	stroke-dasharray: 115;
+	stroke-dashoffset: 0;
+	-webkit-animation: check-dash 1.6s linear forwards;
+	-o-webkit-animation: check-dash 1.6s linear forwards;
+	-moz-webkit-animation: check-dash 1.6s linear forwards;
+	animation: check-dash 1.6s linear forwards;
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+			animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+  }
+  
+  .check-ahead {
+	stroke-dasharray: 115;
+	stroke-dashoffset: 0;
+	-webkit-animation: check-ahead 1.6s linear forwards;
+	-o-webkit-animation: check-ahead 1.6s linear forwards;
+	-moz-webkit-animation: check-ahead 1.6s linear forwards;
+	animation: check-ahead 1.6s linear forwards;
+	-webkit-animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+			animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+  }
+  
+  @-webkit-keyframes check-ahead {
+	from {
+	  stroke-dashoffset: -15;
+	}
+	to {
+	  stroke-dashoffset: -130;
+	}
+  }
