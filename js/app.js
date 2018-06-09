@@ -5,10 +5,13 @@ let OpenedCards = [];
 let allElements = [];
 const restartGame = document.getElementsByClassName("restart");
 let moves = 0;
+let seconds = 1, mins = 0;
 const movesCounter = document.querySelector("span.moves");
+const movesTimer = document.querySelector("span.timer");
 const stars = document.querySelectorAll(".fa-star");
 const playAgainBtn = document.getElementsByClassName("play-again-btn");
 let matchedCard = document.getElementsByClassName("match");
+
 
 // Initiate game while the document is loading
 document.body.onload = startGame(); 
@@ -35,6 +38,7 @@ function startGame() {
     let elements = ['diamond', 'paper-plane-o', 'anchor', 'bolt', 'cube', 'leaf', 'bicycle', 'bomb'];
     allElements = elements.concat(elements);
     moves = 0;
+   
     movesCounter.innerHTML = moves;
     shuffle(allElements);
     // Append elements to the DOM
@@ -59,6 +63,7 @@ function startGame() {
         card[i].addEventListener("click",showCongrats);
         
     }
+    
 }
 
 // Restart Game
@@ -143,6 +148,10 @@ function enableAllCards() {
 
 // adjust stars based on moves
 function moveCounter(){
+    if(moves === 1 ) {
+        calculateTime();
+    }
+
     if (moves > 16 && moves < 22){
         for( i= 0; i < 3; i++){
             if(i > 1){
@@ -180,4 +189,35 @@ restartGame[0].addEventListener("click", restart);
 // Event listener for play again button
 playAgainBtn[0].addEventListener("click", restart);
 
+// const startTime = Date.now();
+// function countTime () {
+// debugger;
+    
+    
+//     let x = setInterval(function() {
+//     console.log(x);
+//     now = Date.now() - startTime;
+//     }, 1000)
+    
 
+// }
+// countTime();
+
+function calculateTime() {
+setInterval(function() {
+    // console.log("mins " + mins + " seconds " + seconds );
+    movesTimer.innerHTML = "mins " + mins + " secs " + seconds;
+    seconds++;
+    if(seconds == 60) {
+        seconds = 0;
+        mins++
+    }
+
+}, 1000);
+}
+
+
+
+
+
+// startTimer();
