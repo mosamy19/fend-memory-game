@@ -138,7 +138,9 @@ i.fa.fa-star {
 	opacity: 0.9;
 }
 
-
+div.final-time {
+	margin-bottom: 20px;
+}
 
 @keyframes flipInY {
 	from {
@@ -240,6 +242,12 @@ i.fa.fa-star {
     letter-spacing: 40px;
 	color: orangered;
 	margin-bottom: 20px;
+}
+div#final-Stars i {
+	margin-right: 20px;
+}
+div#final-Stars i:last-of-type {
+	margin-right: 0;
 }
 #final-moves {
 	margin-right: 5px;
@@ -470,4 +478,4 @@ i.fa.fa-star {
 	to {
 	  stroke-dashoffset: -130;
 	}
-  }
+	}
