@@ -1,7 +1,5 @@
 # Memory Game Project
 
-## Table of Contents
-
 
 ## What Is This Repo For?
 This is my solution for Udacity **Frontend Nanodegree** Memory Game project.
