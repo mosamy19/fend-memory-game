@@ -28,7 +28,7 @@ document.body.onload = startGame();
 
 // Shuffle cards
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -56,7 +56,7 @@ function startGame() {
     const iconsUL = document.createElement("ul");
     iconsUL.className = "deck";
   
-    for (var i = 0;  i < allElements.length; i++) {
+    for (let i = 0;  i < allElements.length; i++) {
         const iconLi = document.createElement("li");
         iconLi.className = "card";
         iconLi.setAttribute("value", allElements[i]);
@@ -71,7 +71,7 @@ function startGame() {
     
     
     // Event listners for cards  
-    for (var i = 0; i < allElements.length; i++){
+    for (let i = 0; i < allElements.length; i++){
         card[i].addEventListener("click", clickCard);
         card[i].addEventListener("click", openCards);
         card[i].addEventListener("click",showCongrats);
@@ -82,7 +82,6 @@ function startGame() {
 // Restart Game
 function restart() {
     document.querySelector("ul.deck").remove();
-    console.log(document.querySelector("ul.deck").remove())
     document.getElementById("congrats").style.display ='none';
     clearInterval(interval);
     startGame();
@@ -92,11 +91,11 @@ function restart() {
 function fillStarConatiner() {
     starContaner.innerHTML = "";
     for (let i = 0; i < 3; i++) {
-        var x = document.createElement("li");
-        var y = document.createElement("i");
-        y.classList.add("fa", "fa-star");
-        x.appendChild(y);
-        starContaner.appendChild(x);
+        let starsList = document.createElement("li");
+        let starElement = document.createElement("i");
+        starElement.classList.add("fa", "fa-star");
+        starsList.appendChild(starElement);
+        starContaner.appendChild(starsList);
     }
     stars = document.querySelectorAll(".fa-star");
 }
